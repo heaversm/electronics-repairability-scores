@@ -1,34 +1,17 @@
-// Imports the Google Cloud client libraries
-//const vision = require("@google-cloud/vision");
-
 import vision from "@google-cloud/vision";
 import fs from "fs";
 
 // Creates a client
 const client = new vision.ImageAnnotatorClient();
 
-// const scores = [
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/0-a-19-3-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/6-a-79-46-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/4-a-59-35-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/4-a-59-34-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/6-a-79-45-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/6-a-79-43-230x350.png",
-//   "https://www.indicereparabilite.fr/wp-content/uploads/2021/08/4-a-59-33-230x350.png",
-// ];
-
 // const scores = require("./repairability-images.json");
 //convert scores require to an es module import {  } from "module";
 import scores from "./repairability-images.json" assert { type: "json" };
 
-/**
- * TODO(developer): Uncomment the following lines before running the sample.
- */
-// const bucketName = 'Bucket where the file resides, e.g. my-bucket';
-// const fileName = 'Path to file within bucket, e.g. path/to/image.png';
+//will hold the array of all OCR-generated scores from the Cloud Vision API
+const scoreResults = [];
 
-// Performs text detection on the gcs file
-
+//write a single record to a file
 const writeLine = function (data) {
   fs.appendFile(
     "./repairability-scores.txt",
@@ -42,6 +25,7 @@ const writeLine = function (data) {
   );
 };
 
+//write all repairability score data from an array to a file
 const writeAllData = function (data) {
   const dataJSON = JSON.stringify(data);
 
@@ -54,6 +38,7 @@ const writeAllData = function (data) {
   });
 };
 
+//perform OCR on a single image to get its repairability score using the google cloud vision api
 async function getSingleScore(url) {
   const [result] = await client.textDetection(url);
   const detections = result.textAnnotations;
@@ -69,9 +54,7 @@ async function getSingleScore(url) {
   }
 }
 
-const scoreResults = [];
-
-async function init() {
+async function getAllScores() {
   await scores.reduce(async (a, score) => {
     // Wait for the previous item to finish processing
     await a;
@@ -89,6 +72,10 @@ async function init() {
   console.log("scoreResults");
   console.log(scoreResults);
   writeAllData(scoreResults);
+}
+
+async function init() {
+  getAllScores();
 }
 
 init();
