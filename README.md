@@ -9,7 +9,7 @@
 
 Export credentials path ([Instructions](https://stackoverflow.com/questions/35532645/google-cloud-vision-api-permission-denied)):
 
-`export GOOGLE_APPLICATION_CREDENTIALS='/Users/mheavers/Documents/Mozilla/Environment/privacy-not-included/reparabilite/ocr/repairability-35964b3f8b04.json'`
+`export GOOGLE_APPLICATION_CREDENTIALS='/Users/mheavers/Documents/Mozilla/Environment/privacy-not-included/reparabilite/ocr/[YOUR_JSON_FILE]'`
 
 [Implicit Auth](https://cloud.google.com/docs/authentication/client-libraries)
 
