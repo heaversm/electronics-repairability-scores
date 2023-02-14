@@ -8,7 +8,8 @@ The [repairability-final.csv](repairability-final.csv) file contains the final o
 
 You can additionally access the data [in Google Sheets here](https://docs.google.com/spreadsheets/d/1ZMOe5CCLjBTWuiOnP9nE8g-6txdh79Atkwqhzc9sp7A/edit#gid=0), where it may be a bit easier to work with / preview.
 
-I recorded a short walkthrough of the process of gathering this data 
+[I've recorded a video of that process here](https://www.youtube.com/watch?v=BnJIcMfDQqc) in case it helps you compile data for your own purposes
+
 
 ## Goal
 
@@ -16,8 +17,7 @@ My goal in this project was to try and get data on how repairable electronics ar
 
 The data was collected via a no-code scraper called [Bardeen](https://www.bardeen.ai/) and, since the actual repairability scores were encoded into JPGs with no usable textual representation of the score (metadata, alt tags, data attributes, etc), I had to use the Google Cloud Vision API to convert the score in the image into text (which worked surprisingly well!)
 
-[I've recorded a video of that process here](https://www.youtube.com/watch?v=BnJIcMfDQqc) in case it helps you compile data for your own puproses
-
+[Here's a great podcast episode from How to Save A Planet on why repairability is important with the founder of iFixIt](https://gimletmedia.com/shows/howtosaveaplanet/5whn325/why-is-it-so-hard-to-fix-our-electronics)
 
 ## Running the Code
 
